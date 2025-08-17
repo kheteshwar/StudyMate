@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudyMate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Gochi+Hand&family=Inter:wght@400;600;700&family=Kalam:wght@400;700&family=Patrick+Hand&family=Shantell+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="icon" type="image/png" href="favicon.jpg" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="container header-inner">
+        <div class="brand">
+          <img src="logo.png" class="logo-img" alt="SolveBuddy logo" />
+          <h1>StudyMate</h1>
+        </div>
+        <div class="controls">
+          <div
+            class="mode-toggle"
+            title="Switch between Basic and Detailed explanations"
+          >
+            <span>Basic</span>
+            <label class="switch">
+              <input
+                type="checkbox"
+                id="detailToggle"
+                aria-label="Toggle detailed mode"
+              />
+              <span class="slider"></span>
+            </label>
+            <span>Detailed</span>
+          </div>
+          <button
+            id="themeToggleBtn"
+            class="btn ghost small fab"
+            title="Toggle light/dark theme"
+          >
+            <i
+              class="fa-solid fa-moon icon"
+              id="themeIcon"
+              aria-hidden="true"
+            ></i>
+            <span class="label">Theme</span>
+          </button>
+          <label for="fontPicker" class="sr-only">Font</label>
+          <select id="fontPicker" class="font-select" title="Change font">
+            <option
+              value="font-patrick"
+              style="font-family: 'Patrick Hand', cursive"
+            >
+              Patrick Hand (default)
+            </option>
+            <option value="font-kalam" style="font-family: 'Kalam', cursive">
+              Kalam
+            </option>
+            <option value="font-caveat" style="font-family: 'Caveat', cursive">
+              Caveat
+            </option>
+            <option
+              value="font-gochi"
+              style="font-family: 'Gochi Hand', cursive"
+            >
+              Gochi Hand
+            </option>
+            <option
+              value="font-shantell"
+              style="font-family: 'Shantell Sans', cursive"
+            >
+              Shantell Sans
+            </option>
+            <option
+              value="font-inter"
+              style="
+                font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto,
+                  Ubuntu, Cantarell, 'Helvetica Neue', Arial;
+              "
+            >
+              Inter
+            </option>
+          </select>
+          <button
+            id="sketchToggleBtn"
+            class="btn ghost small fab"
+            title="Sketch / Highlight on screen"
+          >
+            <i class="fa-solid fa-pencil icon" aria-hidden="true"></i
+            ><span class="label">Sketch</span>
+          </button>
+          <button
+            id="bgmToggleBtn"
+            class="btn ghost small fab"
+            title="Background music mute/unmute"
+          >
+            <i
+              class="fa-solid fa-music icon"
+              id="bgmIcon"
+              aria-hidden="true"
+            ></i>
+            <span id="bgmLabel" class="label">Music</span>
+          </button>
+          <button
+            id="toggleSidebarBtn"
+            class="btn ghost small fab"
+            title="Show or hide history"
+          >
+            <i class="fa-solid fa-clock-rotate-left icon" aria-hidden="true"></i
+            ><span class="label">History</span>
+          </button>
+          <button id="helpBtn" class="btn ghost small fab" title="Help & info">
+            <i class="fa-solid fa-circle-info icon" aria-hidden="true"></i>
+            <span class="label">Help</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="container main">
+      <div class="layout">
+        <section class="content">
+          <section class="actions">
+            <button id="takePhotoBtn" class="btn primary big">
+              <i class="fa-solid fa-camera icon" aria-hidden="true"></i
+              ><span>Take Photo</span>
+            </button>
+            <button id="uploadPhotoBtn" class="btn secondary big">
+              <i class="fa-solid fa-upload icon" aria-hidden="true"></i
+              ><span>Upload Photo</span>
+            </button>
+            <button id="typeAnswerBtn" class="btn secondary big">
+              <i class="fa-solid fa-keyboard icon" aria-hidden="true"></i
+              ><span>Type Answer</span>
+            </button>
+            <input id="fileInput" type="file" accept="image/*" hidden />
+          </section>
+
+          <section class="type-in card hidden" id="typeInCard">
+            <h3 class="type-title">
+              <i
+                class="fa-solid fa-keyboard icon"
+                style="margin-right: 8px"
+                aria-hidden="true"
+              ></i
+              ><span>Type your question</span>
+            </h3>
+            <textarea
+              id="typedQuestion"
+              rows="4"
+              placeholder="Type or paste a homework question here..."
+            ></textarea>
+            <div class="type-actions">
+              <button id="explainTypedBtn" class="btn primary">
+                <i
+                  class="fa-solid fa-wand-magic-sparkles icon"
+                  aria-hidden="true"
+                ></i
+                ><span>Explain</span>
+              </button>
+              <button id="clearTypedBtn" class="btn ghost small">
+                <i class="fa-solid fa-eraser icon" aria-hidden="true"></i
+                ><span>Clear</span>
+              </button>
+            </div>
+          </section>
+
+          <section
+            id="progressArea"
+            class="progress"
+            aria-live="polite"
+          ></section>
+
+          <div class="results-toolbar hidden" id="resultsToolbar">
+            <button id="speakBtn" class="btn secondary small">
+              <i class="fa-solid fa-volume-high icon" aria-hidden="true"></i
+              ><span>Read Aloud</span>
+            </button>
+            <button id="stopSpeakBtn" class="btn ghost small">
+              <i class="fa-solid fa-stop icon" aria-hidden="true"></i
+              ><span>Stop</span>
+            </button>
+            <button
+              id="closeResultsBtn"
+              class="btn ghost small"
+              title="Close results"
+            >
+              <i class="fa-solid fa-xmark icon" aria-hidden="true"></i
+              ><span>Close</span>
+            </button>
+          </div>
+
+          <section id="results" class="results" aria-live="polite"></section>
+        </section>
+        <aside class="sidebar">
+          <div class="history-header">
+            <h2>
+              <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
+              History
+            </h2>
+            <button id="clearHistoryBtn" class="btn ghost small">
+              <i class="fa-solid fa-trash icon" aria-hidden="true"></i
+              ><span>Clear</span>
+            </button>
+          </div>
+          <div id="historyList" class="history-list"></div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- Minimal coach overlay pointing to the mode toggle -->
+    <div id="coachOverlay" class="coach-overlay" aria-hidden="true"></div>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal" aria-hidden="true">
+      <div class="modal-backdrop" id="closeHelpModal"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>How to use SolveBuddy</h3>
+          <button class="icon-btn" id="xHelpModal" aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="camera-area">
+          <div class="welcome-body">
+            <ul>
+              <li>
+                <strong>Basic</strong> vs <strong>Detailed</strong>: use the
+                switch at the top. Basic is quick (3–5 steps); Detailed is
+                deeper (6–9 steps with examples).
+              </li>
+              <li>
+                <strong>Take/Upload/Type</strong>: choose how to send your
+                question. We run OCR for photos.
+              </li>
+              <li>
+                <strong>Read Aloud</strong>: after an explanation appears, use
+                the toolbar to hear it.
+              </li>
+              <li>
+                <strong>History</strong>: your questions/solutions are saved
+                locally on this device only.
+              </li>
+              <li>
+                <strong>Sketch</strong>: draw highlights on screen, then tap
+                Done to close.
+              </li>
+              <li>
+                <strong>Theme/Font</strong>: customize from the top controls and
+                bottom-left buttons.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button id="helpOkBtn" class="btn primary small">
+            <i class="fa-solid fa-check icon" aria-hidden="true"></i>
+            <span>Got it</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sketch / Highlight Overlay -->
+    <div id="sketchOverlay" class="sketch-overlay" aria-hidden="true">
+      <canvas id="sketchCanvas"></canvas>
+      <div class="sketch-toolbar">
+        <button id="sketchClearBtn" class="btn small">
+          <i class="fa-solid fa-eraser icon" aria-hidden="true"></i
+          ><span>Clear</span>
+        </button>
+        <button id="sketchCloseBtn" class="btn primary small">
+          <i class="fa-solid fa-xmark icon" aria-hidden="true"></i
+          ><span>Done</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Background music (will play only after user interaction) -->
+    <audio id="bgmAudio" src="bgm.mp3" preload="none" loop></audio>
+
+    <!-- Webcam Modal -->
+    <div id="cameraModal" class="modal" aria-hidden="true">
+      <div class="modal-backdrop" id="closeCameraModal"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Take a Photo</h3>
+          <button class="icon-btn" id="xCameraModal" aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="camera-area">
+          <video id="cameraVideo" autoplay playsinline></video>
+          <canvas id="cameraCanvas"></canvas>
+        </div>
+        <div class="modal-actions">
+          <button id="captureBtn" class="btn primary">
+            <i class="fa-solid fa-camera icon" aria-hidden="true"></i
+            ><span>Capture</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
