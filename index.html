@@ -35,18 +35,14 @@
             <i class="fa-solid fa-upload icon" aria-hidden="true"></i
             ><span>Upload Photo</span>
           </button>
-          <button id="typeAnswerBtn" class="btn secondary big">
-            <i class="fa-solid fa-keyboard icon" aria-hidden="true"></i
-            ><span>Type Answer</span>
-          </button>
           <input id="fileInput" type="file" accept="image/*" hidden />
         </div>
         <div class="controls">
           <div
             class="mode-toggle"
-            title="Switch between Basic and Detailed explanations"
+            title="Switch between Quick and Detailed explanations"
           >
-            <span>Basic</span>
+            <span>Quick</span>
             <label class="switch">
               <input
                 type="checkbox"
@@ -57,7 +53,7 @@
             </label>
             <span>Detailed</span>
           </div>
-          <label for="fontPicker" class="sr-only">Font</label>
+          <!-- <label for="fontPicker" class="sr-only">Font</label>
           <select id="fontPicker" class="font-select" title="Change font">
             <option
               value="font-patrick"
@@ -92,7 +88,7 @@
             >
               Inter
             </option>
-          </select>
+          </select> -->
         </div>
       </div>
     </header>
@@ -167,6 +163,14 @@
           </div>
 
           <section id="results" class="results" aria-live="polite"></section>
+
+          <!-- Optional Type Answer Section -->
+          <div class="type-answer-option">
+            <button id="typeAnswerBtn" class="btn ghost small subtle">
+              <i class="fa-solid fa-keyboard icon" aria-hidden="true"></i>
+              <span>Type Question Instead</span>
+            </button>
+          </div>
         </section>
       </div>
     </main>
@@ -216,7 +220,7 @@
       <div class="modal-backdrop" id="closeHelpModal"></div>
       <div class="modal-content">
         <div class="modal-header">
-          <h3>How to use SolveBuddy</h3>
+          <h3>How to use StudyMate</h3>
           <button class="icon-btn" id="xHelpModal" aria-label="Close">
             <i class="fa-solid fa-xmark"></i>
           </button>
@@ -225,8 +229,8 @@
           <div class="welcome-body">
             <ul>
               <li>
-                <strong>Basic</strong> vs <strong>Detailed</strong>: use the
-                switch at the top. Basic is quick (3–5 steps); Detailed is
+                <strong>Quick</strong> vs <strong>Detailed</strong>: use the
+                switch at the top. Quick is brief (3–5 steps); Detailed is
                 deeper (6–9 steps with examples).
               </li>
               <li>
