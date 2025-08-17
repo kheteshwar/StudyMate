@@ -17,7 +17,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="icon" type="image/png" href="favicon.jpg" />
+    <link rel="icon" type="image/png" href="favicon.png" />
   </head>
   <body>
     <header class="app-header">
@@ -67,7 +67,7 @@
           </div>
 
           <!-- Font Picker -->
-          <label for="fontPicker" class="sr-only">Font</label>
+          <!-- <label for="fontPicker" class="sr-only">Font</label>
           <select id="fontPicker" class="font-select" title="Change font">
             <option
               value="font-patrick"
@@ -102,7 +102,20 @@
             >
               Inter
             </option>
-          </select>
+          </select> -->
+
+          <!-- Show History Button -->
+          <button
+            id="emergencyShowHistoryBtn"
+            class="btn ghost small"
+            title="Show History Panel"
+          >
+            <i
+              class="fa-solid fa-clock-rotate-left icon"
+              aria-hidden="true"
+            ></i>
+            <span>History</span>
+          </button>
         </div>
       </div>
     </header>
@@ -132,7 +145,7 @@
           <div class="welcome-state" id="welcomeState">
             <div class="welcome-content">
               <img
-                src="elements.png"
+                src="logo.png"
                 alt="Study elements"
                 class="welcome-image"
               />
@@ -161,7 +174,7 @@
               </div>
 
               <!-- Quick Access Tools -->
-              <div class="quick-tools">
+              <!-- <div class="quick-tools">
                 <button
                   id="sketchToggleBtn"
                   class="tool-btn-small"
@@ -170,19 +183,7 @@
                   <i class="fa-solid fa-pencil icon" aria-hidden="true"></i>
                   <span>Sketch</span>
                 </button>
-                <button
-                  id="bgmToggleBtn"
-                  class="tool-btn-small"
-                  title="Background music mute/unmute"
-                >
-                  <i
-                    class="fa-solid fa-music icon"
-                    id="bgmIcon"
-                    aria-hidden="true"
-                  ></i>
-                  <span id="bgmLabel">Music</span>
-                </button>
-              </div>
+              </div> -->
             </div>
           </div>
 
@@ -252,6 +253,18 @@
         </section>
       </div>
     </main>
+
+    <!-- Bottom Right Controls -->
+    <div class="bottom-controls">
+      <!-- Music Button -->
+      <button
+        id="bgmToggleBtn"
+        class="bottom-btn"
+        title="Background music mute/unmute"
+      >
+        <i class="fa-solid fa-music icon" id="bgmIcon" aria-hidden="true"></i>
+      </button>
+    </div>
 
     <!-- Help Button -->
     <button id="helpBtn" class="help-btn" title="Help & info">
