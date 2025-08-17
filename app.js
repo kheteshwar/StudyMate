@@ -857,6 +857,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const layout = document.querySelector(".layout");
   const historyPanel = document.querySelector(".history-panel");
   const toggleBtn = document.getElementById("toggleSidebarBtn");
+  const headerHistoryBtn = document.getElementById("emergencyShowHistoryBtn");
 
   if (!layout || !historyPanel) {
     console.error("History panel or layout not found");
@@ -900,6 +901,13 @@ window.addEventListener("DOMContentLoaded", () => {
         text.textContent = "Hide";
       }
     }
+  }
+
+  // Ensure header history button is always visible and shows correct state
+  if (headerHistoryBtn) {
+    headerHistoryBtn.style.display = "flex";
+    headerHistoryBtn.style.alignItems = "center";
+    headerHistoryBtn.style.gap = "6px";
   }
 
   // Init BGM icon/label from saved state (no autoplay)
@@ -1213,7 +1221,7 @@ sketchCanvas?.addEventListener("touchmove", draw, { passive: true });
   sketchCanvas?.addEventListener(ev, endDraw)
 );
 
-// Emergency show history button
+// Emergency show history button (now in header - always visible)
 document
   .getElementById("emergencyShowHistoryBtn")
   ?.addEventListener("click", () => {
@@ -1223,26 +1231,41 @@ document
 
     if (!layout || !historyPanel) return;
 
-    // Force show the history panel
-    historyPanel.classList.remove("hidden");
-    layout.classList.remove("history-hidden");
+    const isCurrentlyHidden = historyPanel.classList.contains("hidden");
 
-    // Update the toggle button state
-    if (toggleBtn) {
-      const icon = toggleBtn.querySelector("i");
-      const text = toggleBtn.querySelector("span");
-      if (icon && text) {
-        icon.className = "fa-solid fa-eye-slash icon";
-        text.textContent = "Hide";
+    if (isCurrentlyHidden) {
+      // History is currently hidden, so show it
+      historyPanel.classList.remove("hidden");
+      layout.classList.remove("history-hidden");
+
+      // Update the toggle button state in history panel
+      if (toggleBtn) {
+        const icon = toggleBtn.querySelector("i");
+        const text = toggleBtn.querySelector("span");
+        if (icon && text) {
+          icon.className = "fa-solid fa-eye-slash icon";
+          text.textContent = "Hide";
+        }
       }
-    }
 
-    // Save the state
-    setSidebarHidden(false);
+      // Save the state
+      setSidebarHidden(false);
+    } else {
+      // History is currently shown, so hide it
+      historyPanel.classList.add("hidden");
+      layout.classList.add("history-hidden");
 
-    // Hide the emergency button after use
-    const emergencyBtn = document.getElementById("emergencyShowHistoryBtn");
-    if (emergencyBtn) {
-      emergencyBtn.style.display = "none";
+      // Update the toggle button state in history panel
+      if (toggleBtn) {
+        const icon = toggleBtn.querySelector("i");
+        const text = toggleBtn.querySelector("span");
+        if (icon && text) {
+          icon.className = "fa-solid fa-eye icon";
+          text.textContent = "Show";
+        }
+      }
+
+      // Save the state
+      setSidebarHidden(true);
     }
   });
