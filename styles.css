@@ -1,5 +1,5 @@
 :root {
-  --bg: #f7d6d0; /* soft peach like reference */
+  --bg: #FACF43; 
   --ink: #1f2937; /* deep slate text */
   --muted: #6b7280;
   --primary: #2b2b3f; /* dark pill button */
@@ -35,7 +35,7 @@ body {
   background: var(--bg);
   /* Decorative background image anchored bottom-right, behind all content */
   /* Add a same-color translucent layer above the image to reduce its opacity */
-  background-image: linear-gradient(rgba(247,214,208,0.85), rgba(247,214,208,0.85)), url('elements.png');
+  /* background-image: linear-gradient(rgba(247,214,208,0.85), rgba(247,214,208,0.85)), url('elements.png'); */
   background-repeat: no-repeat, no-repeat;
   background-position: right -10px bottom -40px, right -10px bottom -40px;
   background-size: 340px, 340px;
