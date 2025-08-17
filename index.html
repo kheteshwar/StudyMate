@@ -53,7 +53,22 @@
             </label>
             <span>Detailed</span>
           </div>
-          <!-- <label for="fontPicker" class="sr-only">Font</label>
+          
+          <!-- Theme Toggle -->
+          <button
+            id="themeToggleBtn"
+            class="btn ghost small"
+            title="Toggle light/dark theme"
+          >
+            <i
+              class="fa-solid fa-moon icon"
+              id="themeIcon"
+              aria-hidden="true"
+            ></i>
+          </button>
+          
+          <!-- Font Picker -->
+          <label for="fontPicker" class="sr-only">Font</label>
           <select id="fontPicker" class="font-select" title="Change font">
             <option
               value="font-patrick"
@@ -88,7 +103,7 @@
             >
               Inter
             </option>
-          </select> -->
+          </select>
         </div>
       </div>
     </header>
@@ -100,14 +115,78 @@
               <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
               History
             </h2>
-            <button id="clearHistoryBtn" class="btn ghost small">
-              <i class="fa-solid fa-trash icon" aria-hidden="true"></i
-              ><span>Clear</span>
-            </button>
+            <div class="history-controls">
+              <button id="toggleSidebarBtn" class="btn ghost small">
+                <i class="fa-solid fa-eye-slash icon" aria-hidden="true"></i>
+                <span>Hide</span>
+              </button>
+              <button id="clearHistoryBtn" class="btn ghost small">
+                <i class="fa-solid fa-trash icon" aria-hidden="true"></i
+                ><span>Clear</span>
+              </button>
+            </div>
           </div>
           <div id="historyList" class="history-list"></div>
         </aside>
         <section class="content-panel">
+          <!-- Welcome Empty State -->
+          <div class="welcome-state" id="welcomeState">
+            <div class="welcome-content">
+              <img
+                src="elements.png"
+                alt="Study elements"
+                class="welcome-image"
+              />
+              <h2>Welcome to StudyMate! 📚</h2>
+              <p class="welcome-subtitle">Your AI-powered study companion</p>
+              <div class="welcome-features">
+                <div class="feature-item">
+                  <i class="fa-solid fa-camera"></i>
+                  <span>Take a photo of your question</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fa-solid fa-upload"></i>
+                  <span>Upload an image</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                  <span>Get instant explanations</span>
+                </div>
+              </div>
+              <div class="welcome-tip">
+                <i class="fa-solid fa-lightbulb"></i>
+                <span
+                  >Use the Quick/Detailed toggle for different explanation
+                  depths</span
+                >
+              </div>
+              
+              <!-- Quick Access Tools -->
+              <div class="quick-tools">
+                <button
+                  id="sketchToggleBtn"
+                  class="tool-btn-small"
+                  title="Sketch / Highlight on screen"
+                >
+                  <i class="fa-solid fa-pencil icon" aria-hidden="true"></i>
+                  <span>Sketch</span>
+                </button>
+                <button
+                  id="bgmToggleBtn"
+                  class="tool-btn-small"
+                  title="Background music mute/unmute"
+                >
+                  <i
+                    class="fa-solid fa-music icon"
+                    id="bgmIcon"
+                    aria-hidden="true"
+                  ></i>
+                  <span id="bgmLabel">Music</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
           <section class="type-in card hidden" id="typeInCard">
             <h3 class="type-title">
               <i
@@ -165,47 +244,15 @@
           <section id="results" class="results" aria-live="polite"></section>
 
           <!-- Optional Type Answer Section -->
-          <div class="type-answer-option">
+          <!-- <div class="type-answer-option">
             <button id="typeAnswerBtn" class="btn ghost small subtle">
               <i class="fa-solid fa-keyboard icon" aria-hidden="true"></i>
               <span>Type Question Instead</span>
             </button>
-          </div>
+          </div> -->
         </section>
       </div>
     </main>
-
-    <!-- Floating Tools Sidebar -->
-    <div class="floating-tools">
-      <button
-        id="themeToggleBtn"
-        class="tool-btn"
-        title="Toggle light/dark theme"
-      >
-        <i class="fa-solid fa-moon icon" id="themeIcon" aria-hidden="true"></i>
-      </button>
-      <button
-        id="sketchToggleBtn"
-        class="tool-btn"
-        title="Sketch / Highlight on screen"
-      >
-        <i class="fa-solid fa-pencil icon" aria-hidden="true"></i>
-      </button>
-      <button
-        id="bgmToggleBtn"
-        class="tool-btn"
-        title="Background music mute/unmute"
-      >
-        <i class="fa-solid fa-music icon" id="bgmIcon" aria-hidden="true"></i>
-      </button>
-      <button
-        id="toggleSidebarBtn"
-        class="tool-btn"
-        title="Show or hide history"
-      >
-        <i class="fa-solid fa-clock-rotate-left icon" aria-hidden="true"></i>
-      </button>
-    </div>
 
     <!-- Help Button -->
     <button id="helpBtn" class="help-btn" title="Help & info">
