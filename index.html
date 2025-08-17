@@ -23,8 +23,23 @@
     <header class="app-header">
       <div class="container header-inner">
         <div class="brand">
-          <img src="logo.png" class="logo-img" alt="SolveBuddy logo" />
+          <img src="logo.png" class="logo-img" alt="StudyMate logo" />
           <h1>StudyMate</h1>
+        </div>
+        <div class="center-actions">
+          <button id="takePhotoBtn" class="btn primary big">
+            <i class="fa-solid fa-camera icon" aria-hidden="true"></i
+            ><span>Take Photo</span>
+          </button>
+          <button id="uploadPhotoBtn" class="btn secondary big">
+            <i class="fa-solid fa-upload icon" aria-hidden="true"></i
+            ><span>Upload Photo</span>
+          </button>
+          <button id="typeAnswerBtn" class="btn secondary big">
+            <i class="fa-solid fa-keyboard icon" aria-hidden="true"></i
+            ><span>Type Answer</span>
+          </button>
+          <input id="fileInput" type="file" accept="image/*" hidden />
         </div>
         <div class="controls">
           <div
@@ -42,18 +57,6 @@
             </label>
             <span>Detailed</span>
           </div>
-          <button
-            id="themeToggleBtn"
-            class="btn ghost small fab"
-            title="Toggle light/dark theme"
-          >
-            <i
-              class="fa-solid fa-moon icon"
-              id="themeIcon"
-              aria-hidden="true"
-            ></i>
-            <span class="label">Theme</span>
-          </button>
           <label for="fontPicker" class="sr-only">Font</label>
           <select id="fontPicker" class="font-select" title="Change font">
             <option
@@ -90,60 +93,25 @@
               Inter
             </option>
           </select>
-          <button
-            id="sketchToggleBtn"
-            class="btn ghost small fab"
-            title="Sketch / Highlight on screen"
-          >
-            <i class="fa-solid fa-pencil icon" aria-hidden="true"></i
-            ><span class="label">Sketch</span>
-          </button>
-          <button
-            id="bgmToggleBtn"
-            class="btn ghost small fab"
-            title="Background music mute/unmute"
-          >
-            <i
-              class="fa-solid fa-music icon"
-              id="bgmIcon"
-              aria-hidden="true"
-            ></i>
-            <span id="bgmLabel" class="label">Music</span>
-          </button>
-          <button
-            id="toggleSidebarBtn"
-            class="btn ghost small fab"
-            title="Show or hide history"
-          >
-            <i class="fa-solid fa-clock-rotate-left icon" aria-hidden="true"></i
-            ><span class="label">History</span>
-          </button>
-          <button id="helpBtn" class="btn ghost small fab" title="Help & info">
-            <i class="fa-solid fa-circle-info icon" aria-hidden="true"></i>
-            <span class="label">Help</span>
-          </button>
         </div>
       </div>
     </header>
     <main class="container main">
       <div class="layout">
-        <section class="content">
-          <section class="actions">
-            <button id="takePhotoBtn" class="btn primary big">
-              <i class="fa-solid fa-camera icon" aria-hidden="true"></i
-              ><span>Take Photo</span>
+        <aside class="history-panel">
+          <div class="history-header">
+            <h2>
+              <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
+              History
+            </h2>
+            <button id="clearHistoryBtn" class="btn ghost small">
+              <i class="fa-solid fa-trash icon" aria-hidden="true"></i
+              ><span>Clear</span>
             </button>
-            <button id="uploadPhotoBtn" class="btn secondary big">
-              <i class="fa-solid fa-upload icon" aria-hidden="true"></i
-              ><span>Upload Photo</span>
-            </button>
-            <button id="typeAnswerBtn" class="btn secondary big">
-              <i class="fa-solid fa-keyboard icon" aria-hidden="true"></i
-              ><span>Type Answer</span>
-            </button>
-            <input id="fileInput" type="file" accept="image/*" hidden />
-          </section>
-
+          </div>
+          <div id="historyList" class="history-list"></div>
+        </aside>
+        <section class="content-panel">
           <section class="type-in card hidden" id="typeInCard">
             <h3 class="type-title">
               <i
@@ -200,21 +168,45 @@
 
           <section id="results" class="results" aria-live="polite"></section>
         </section>
-        <aside class="sidebar">
-          <div class="history-header">
-            <h2>
-              <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
-              History
-            </h2>
-            <button id="clearHistoryBtn" class="btn ghost small">
-              <i class="fa-solid fa-trash icon" aria-hidden="true"></i
-              ><span>Clear</span>
-            </button>
-          </div>
-          <div id="historyList" class="history-list"></div>
-        </aside>
       </div>
     </main>
+
+    <!-- Floating Tools Sidebar -->
+    <div class="floating-tools">
+      <button
+        id="themeToggleBtn"
+        class="tool-btn"
+        title="Toggle light/dark theme"
+      >
+        <i class="fa-solid fa-moon icon" id="themeIcon" aria-hidden="true"></i>
+      </button>
+      <button
+        id="sketchToggleBtn"
+        class="tool-btn"
+        title="Sketch / Highlight on screen"
+      >
+        <i class="fa-solid fa-pencil icon" aria-hidden="true"></i>
+      </button>
+      <button
+        id="bgmToggleBtn"
+        class="tool-btn"
+        title="Background music mute/unmute"
+      >
+        <i class="fa-solid fa-music icon" id="bgmIcon" aria-hidden="true"></i>
+      </button>
+      <button
+        id="toggleSidebarBtn"
+        class="tool-btn"
+        title="Show or hide history"
+      >
+        <i class="fa-solid fa-clock-rotate-left icon" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <!-- Help Button -->
+    <button id="helpBtn" class="help-btn" title="Help & info">
+      <i class="fa-solid fa-circle-info icon" aria-hidden="true"></i>
+    </button>
 
     <!-- Minimal coach overlay pointing to the mode toggle -->
     <div id="coachOverlay" class="coach-overlay" aria-hidden="true"></div>
