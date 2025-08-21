@@ -1344,3 +1344,38 @@ html.font-inter { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Robo
 #emergencyShowHistoryBtn:active i {
   transform: rotate(0deg) scale(0.9);
 }
+
+/* BGM flow animation from music button */
+.bgm-flow-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 80;
+}
+
+.bgm-particle {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  transform: translate(-50%, -50%) scale(0.8);
+  background-image: url('music.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  filter: saturate(1.1) drop-shadow(0 6px 12px rgba(0,0,0,0.15));
+  animation: bgmFloat 3.8s ease-in-out forwards;
+}
+
+@keyframes bgmFloat {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.7) rotate(0deg);
+  }
+  12% { opacity: 0.9; }
+  65% { opacity: 0.6; }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, -240px))) scale(1.05) rotate(12deg);
+  }
+}

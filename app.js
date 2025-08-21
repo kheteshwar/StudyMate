@@ -925,17 +925,16 @@ window.addEventListener("DOMContentLoaded", () => {
     headerHistoryBtn.style.gap = "6px";
   }
 
-  // Init BGM icon/label from saved state (no autoplay)
-  const bgmEnabled = localStorage.getItem("hhai_bgm_enabled") === "1";
-  if (bgmEnabled) {
-    bgmIcon?.classList.add("fa-music");
-    bgmLabel && (bgmLabel.textContent = "Music");
-  } else {
-    bgmAudio.pause();
-    bgmIcon?.classList.remove("fa-music");
-    bgmIcon?.classList.add("fa-volume-xmark");
-    bgmLabel && (bgmLabel.textContent = "Music");
-  }
+  // Init BGM to muted by default on load (override any previous state)
+  try {
+    localStorage.setItem("hhai_bgm_enabled", "0");
+  } catch {}
+  bgmAudio.pause();
+  bgmIcon?.classList.remove("fa-music");
+  bgmIcon?.classList.add("fa-volume-xmark");
+  bgmLabel && (bgmLabel.textContent = "Music");
+  bgmToggleBtn?.classList.remove("bgm-playing");
+  stopBgmFlow();
   // Initialize custom rounded font picker
   initCustomFontPicker();
 
@@ -1076,22 +1075,84 @@ function initCustomFontPicker() {
 
 // Background music controls
 const BGM_KEY = "hhai_bgm_enabled";
+
+// Visual flow layer for music animation
+let bgmFlowIntervalId = null;
+function getOrCreateBgmFlowLayer() {
+  let layer = document.querySelector(".bgm-flow-layer");
+  if (!layer) {
+    layer = document.createElement("div");
+    layer.className = "bgm-flow-layer";
+    document.body.appendChild(layer);
+  }
+  return layer;
+}
+
+function spawnBgmParticle() {
+  if (!bgmToggleBtn) return;
+  // Limit total active particles to avoid clutter
+  const existing = document.querySelectorAll(".bgm-particle").length;
+  if (existing >= 6) return;
+  const rect = bgmToggleBtn.getBoundingClientRect();
+  const startX = rect.left + rect.width / 2;
+  const startY = rect.top + rect.height / 2;
+  const layer = getOrCreateBgmFlowLayer();
+  const particle = document.createElement("div");
+  particle.className = "bgm-particle";
+  particle.style.left = startX + "px";
+  particle.style.top = startY + "px";
+
+  // Localized drift just around the icon area, biased slightly upward
+  const dx = Math.random() * 80 - 40; // -40px to +40px
+  const dy = -(60 + Math.random() * 80); // -60px to -140px
+  particle.style.setProperty("--dx", dx + "px");
+  particle.style.setProperty("--dy", dy + "px");
+
+  particle.addEventListener("animationend", () => {
+    particle.remove();
+  });
+  layer.appendChild(particle);
+}
+
+function startBgmFlow() {
+  if (bgmFlowIntervalId) return;
+  getOrCreateBgmFlowLayer();
+  // Gentle start
+  spawnBgmParticle();
+  bgmFlowIntervalId = window.setInterval(() => {
+    // Emit a single particle occasionally
+    if (Math.random() < 0.65) {
+      spawnBgmParticle();
+    }
+  }, 1800);
+}
+
+function stopBgmFlow() {
+  if (bgmFlowIntervalId) {
+    clearInterval(bgmFlowIntervalId);
+    bgmFlowIntervalId = null;
+  }
+}
 function setBgmEnabled(enabled) {
   try {
     localStorage.setItem(BGM_KEY, enabled ? "1" : "0");
   } catch {}
   if (!bgmAudio) return;
+  // Reflect playing state on the toggle button for styling (e.g., show GIF)
+  bgmToggleBtn?.classList.toggle("bgm-playing", enabled);
   if (enabled) {
     bgmAudio.volume = 0.35;
     bgmAudio.play().catch(() => {});
     bgmIcon?.classList.remove("fa-volume-xmark");
     bgmIcon?.classList.add("fa-music");
     bgmLabel && (bgmLabel.textContent = "Music");
+    startBgmFlow();
   } else {
     bgmAudio.pause();
     bgmIcon?.classList.remove("fa-music");
     bgmIcon?.classList.add("fa-volume-xmark");
     bgmLabel && (bgmLabel.textContent = "Music");
+    stopBgmFlow();
   }
 }
 
