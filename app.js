@@ -753,6 +753,25 @@ takePhotoBtn.addEventListener("click", () => {
   openCamera();
 });
 
+// Type Question button in header
+const typeQuestionBtn = document.getElementById("typeQuestionBtn");
+typeQuestionBtn?.addEventListener("click", () => {
+  if (!typeInCard) return;
+  const willShow = typeInCard.classList.contains("hidden");
+  typeInCard.classList.toggle("hidden", !willShow);
+
+  // Hide welcome state when showing type question
+  const welcomeState = document.getElementById("welcomeState");
+  if (welcomeState) {
+    welcomeState.classList.toggle("hidden", willShow);
+  }
+
+  if (willShow) {
+    typedQuestion?.focus();
+    window.scrollTo({ top: typeInCard.offsetTop || 0, behavior: "smooth" });
+  }
+});
+
 typeAnswerBtn?.addEventListener("click", () => {
   if (!typeInCard) return;
   const willShow = typeInCard.classList.contains("hidden");
