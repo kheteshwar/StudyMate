@@ -39,13 +39,17 @@
           </button>
         </div>
         <div class="center-actions">
-          <button id="takePhotoBtn" class="btn primary big">
+          <button id="takePhotoBtn" class="btn primary">
             <i class="fa-solid fa-camera icon" aria-hidden="true"></i
             ><span>Take Photo</span>
           </button>
-          <button id="uploadPhotoBtn" class="btn secondary big">
+          <button id="uploadPhotoBtn" class="btn secondary">
             <i class="fa-solid fa-upload icon" aria-hidden="true"></i
             ><span>Upload Photo</span>
+          </button>
+          <button id="typeQuestionBtn" class="btn ghost">
+            <i class="fa-solid fa-keyboard icon" aria-hidden="true"></i
+            ><span>Type Question</span>
           </button>
           <input id="fileInput" type="file" accept="image/*" hidden />
         </div>
@@ -144,11 +148,7 @@
           <!-- Welcome Empty State -->
           <div class="welcome-state" id="welcomeState">
             <div class="welcome-content">
-              <img
-                src="logo.png"
-                alt="Study elements"
-                class="welcome-image"
-              />
+              <img src="graphic.png" alt="Study elements" class="welcome-image" />
               <h2>Welcome to StudyMate! 📚</h2>
               <p class="welcome-subtitle">Your AI-powered study companion</p>
               <div class="welcome-features">
@@ -293,8 +293,8 @@
                 deeper (6–9 steps with examples).
               </li>
               <li>
-                <strong>Take/Upload</strong>: choose how to send your
-                question. We run OCR for photos.
+                <strong>Take/Upload</strong>: choose how to send your question.
+                We run OCR for photos.
               </li>
               <li>
                 <strong>Read Aloud</strong>: after an explanation appears, use
@@ -305,7 +305,8 @@
                 locally on this device only.
               </li>
               <li>
-                <strong>Music</strong>:Tap the 🎵 icon to play or mute background music while you study.
+                <strong>Music</strong>:Tap the 🎵 icon to play or mute
+                background music while you study.
               </li>
               <!-- <li>
                 <strong>Sketch</strong>: draw highlights on screen, then tap
