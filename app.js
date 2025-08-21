@@ -260,11 +260,21 @@ function addToHistory(questionText, steps, mode) {
   renderHistory();
 }
 
+// Check if user is new (first time visiting)
+function isNewUser() {
+  return !localStorage.getItem("studymate_user_visited");
+}
+
+// Mark user as visited
+function markUserAsVisited() {
+  localStorage.setItem("studymate_user_visited", "true");
+}
+
 function clearResults() {
   results.innerHTML = "";
-  // Show welcome state when results are cleared
+  // Show welcome state only for new users when results are cleared
   const welcomeState = document.getElementById("welcomeState");
-  if (welcomeState) {
+  if (welcomeState && isNewUser()) {
     welcomeState.classList.remove("hidden");
   }
 }
@@ -314,9 +324,9 @@ function clearImagePreview() {
   const card = document.getElementById("imagePreviewCard");
   if (card && card.parentElement) card.parentElement.removeChild(card);
 
-  // Show welcome state when image preview is cleared
+  // Show welcome state only for new users when image preview is cleared
   const welcomeState = document.getElementById("welcomeState");
-  if (welcomeState && results.innerHTML === "") {
+  if (welcomeState && results.innerHTML === "" && isNewUser()) {
     welcomeState.classList.remove("hidden");
   }
 }
@@ -936,6 +946,9 @@ window.addEventListener("DOMContentLoaded", () => {
   stopBgmFlow();
   // Initialize custom rounded font picker
   initCustomFontPicker();
+
+  // Mark user as visited after first load
+  markUserAsVisited();
 
   // Tip bubble removed as requested
 });

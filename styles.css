@@ -1,5 +1,5 @@
 :root {
-  --primary: #FFD95C;
+  --primary: #FFC700;
   --primary-700: #FFC700;
   --secondary: #ffffff;
   --card: #ffffff;
@@ -154,11 +154,13 @@ body {
 /* Dark mode button enhancements */
 .dark .btn.primary {
   box-shadow: 0 2px 8px rgba(255, 217, 92, 0.2);
+  color: #000000;
 }
 
 .dark .btn.primary:hover {
   box-shadow: 0 6px 16px rgba(255, 217, 92, 0.4);
   transform: translateY(-2px);
+  color: #000000;
 }
 
 .dark .btn.secondary {
@@ -876,11 +878,6 @@ input:checked + .slider:before {
 }
 
 /* Progress States */
-.progress.done {
-  background: #d1fae5;
-  border-color: #10b981;
-  color: #065f46;
-}
 
 /* Results */
 .results .content {
