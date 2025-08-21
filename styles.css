@@ -275,6 +275,8 @@ input:checked + .slider:before {
   grid-template-columns: 35% 65%;
   gap: 32px;
   align-items: start;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  will-change: grid-template-columns, gap;
 }
 
 /* History Panel */
@@ -287,15 +289,50 @@ input:checked + .slider:before {
   position: sticky;
   top: 100px;
   box-shadow: var(--shadow);
-  transition: all 0.3s ease;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform: translateX(0) scale(1);
+  opacity: 1;
+  max-width: 100%;
+  overflow: hidden;
+  will-change: transform, opacity, max-width;
+  animation: slideInFromLeft 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.history-panel:not(.hidden) {
+  animation: slideInFromLeft 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .history-panel.hidden {
-  width: 0;
+  transform: translateX(-120%) scale(0.8);
+  opacity: 0;
   padding: 0;
   border-width: 0;
-  opacity: 0;
-  overflow: hidden;
+  max-width: 0;
+  margin: 0;
+  pointer-events: none;
+  animation: slideOutToLeft 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-120%) scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToLeft {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-120%) scale(0.8);
+    opacity: 0;
+  }
 }
 
 .layout.history-hidden {
@@ -304,6 +341,7 @@ input:checked + .slider:before {
 
 .layout.history-hidden .content-panel {
   max-width: 100%;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .history-header {
@@ -337,6 +375,24 @@ input:checked + .slider:before {
   padding: 32px;
   min-height: 500px;
   box-shadow: var(--shadow);
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  will-change: transform, max-width;
+}
+
+.layout.history-hidden .content-panel {
+  animation: contentExpand 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes contentExpand {
+  0% {
+    transform: scale(0.98);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* Bottom Right Controls */
@@ -772,13 +828,50 @@ input:checked + .slider:before {
   padding: 16px;
   margin-bottom: 12px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideInFromLeft 0.5s ease-out;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .history-item:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow);
   border-color: var(--primary);
+}
+
+.history-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.history-head h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--ink);
+  flex: 1;
+  margin-right: 12px;
+}
+
+.history-head .btn {
+  font-size: 12px;
+  padding: 4px 8px;
+  min-width: auto;
+  height: auto;
+  line-height: 1.2;
+  margin-left: 4px;
 }
 
 .history-item h4 {
@@ -1054,13 +1147,62 @@ html.font-inter { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Robo
   display: flex;
   align-items: center;
   gap: 6px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.history-controls .btn:hover {
+  transform: translateY(-1px);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.history-controls .btn:active {
+  transform: translateY(0) scale(0.95);
 }
 
 .history-controls .btn i {
   font-size: 14px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.history-controls .btn:hover i {
+  transform: scale(1.1);
+}
+
+.history-controls .btn:active i {
+  transform: scale(0.9);
 }
 
 .history-controls .btn span {
   font-size: 12px;
   font-weight: 500;
+}
+
+/* Header History Button Animation */
+#emergencyShowHistoryBtn {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+#emergencyShowHistoryBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#emergencyShowHistoryBtn:active {
+  transform: translateY(0) scale(0.95);
+}
+
+#emergencyShowHistoryBtn i {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#emergencyShowHistoryBtn:hover i {
+  transform: rotate(-10deg) scale(1.1);
+}
+
+#emergencyShowHistoryBtn:active i {
+  transform: rotate(0deg) scale(0.9);
 }

@@ -473,12 +473,8 @@ function renderHistory() {
     });
 
     head.appendChild(h4);
-    const right = document.createElement("div");
-    right.style.display = "flex";
-    right.style.gap = "8px";
-    right.appendChild(viewBtn);
-    right.appendChild(delBtn);
-    head.appendChild(right);
+    head.appendChild(viewBtn);
+    head.appendChild(delBtn);
     el.appendChild(head);
     el.appendChild(meta);
     historyList.appendChild(el);
