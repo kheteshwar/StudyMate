@@ -61,7 +61,7 @@ body {
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }
 
 .logo-img {
@@ -926,7 +926,7 @@ html.font-inter { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Robo
 .welcome-image {
   width: 120px;
   height: auto;
-  margin-bottom: 24px;
+  margin-bottom: -12px;
   opacity: 0.8;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
@@ -935,7 +935,7 @@ html.font-inter { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Robo
   font-size: 28px;
   font-weight: 700;
   color: var(--ink);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   font-family: inherit;
 }
 
