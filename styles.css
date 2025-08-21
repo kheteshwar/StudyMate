@@ -1367,6 +1367,11 @@ html.font-inter { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Robo
   animation: bgmFloat 3.8s ease-in-out forwards;
 }
 
+/* Ensure particles are visible in dark mode by rendering them white */
+.dark .bgm-particle {
+  filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255,255,255,0.2));
+}
+
 @keyframes bgmFloat {
   0% {
     opacity: 0;
