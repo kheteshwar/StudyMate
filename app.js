@@ -51,7 +51,7 @@ const closeCameraModal = document.getElementById("closeCameraModal");
 const xCameraModal = document.getElementById("xCameraModal");
 const captureBtn = document.getElementById("captureBtn");
 
-const GEMINI_API_KEY = "AIzaSyDLtC9Kx-RO7OqLlUSdYhWBPPQ6zByc3Hs";
+const GEMINI_API_KEY = "AIzaSyCK3_EjIpgEJ5QXwT0tkyFGfEZvixYLBM8";
 
 const STORAGE_KEYS = {
   history: "hhai_history_v1",
@@ -60,7 +60,6 @@ const STORAGE_KEYS = {
   fontClass: "hhai_font_class",
 };
 
-// Keep track of the last AI request so we can offer a Retry button on errors
 let lastAiRequest = null; // { questionText: string, detailedMode: boolean }
 
 function getOrCreateRetryButton() {
